@@ -1,21 +1,71 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Under construction</title>
-<style>
-  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
-  canvas { display: block; }
-  p { position: fixed; inset: auto 0 1rem; margin: 0; text-align: center; color: #fff; font: 1rem monospace; }
-</style>
-<script type="importmap">
-{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Under construction</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+    }
+
+    main {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: #fff;
+      font: 1rem monospace;
+      text-align: center;
+    }
+
+    h1,
+    p {
+      margin: 0;
+      font-weight: normal;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    a {
+      color: #fff;
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
 </head>
+
 <body>
-<p>under construction</p>
-<script type="module" src="main.js"></script>
+  <main>
+    <h1>website is under construction</h1>
+    <p>here are some of my projects:</p>
+    <p>
+      <a href="https://watchlist.ahmedzia.ca">watchlist</a> |
+      <a href="https://todolist.ahmedzia.ca">todolist</a>
+    </p>
+  </main>
+  <script type="module" src="main.js"></script>
 </body>
+
 </html>
