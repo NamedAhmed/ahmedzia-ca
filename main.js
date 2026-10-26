@@ -1,18 +1,29 @@
+
 import * as THREE from "three";
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setPixelRatio(devicePixelRatio);
 document.body.prepend(renderer.domElement);
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-camera.position.z = 3;
+scene.background = new THREE.Color(0x050510);
 
-const cube = new THREE.Mesh(
-  new THREE.BoxGeometry(),
-  new THREE.MeshNormalMaterial()
-);
-scene.add(cube);
+const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+camera.position.z = 8;
+
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshNormalMaterial();
+
+const cubes = [];
+
+for (let x = -5; x <= 5; x++) {
+  for (let y = -4; y <= 4; y++) {
+    const cube = new THREE.Mesh(geometry, material);
+    cube.position.set(x * 1.5, y * 1.5, -5);
+    cube.visible = false;
+    scene.add(cube);
+    cubes.push(cube);
+  }
+}
 
 function resize() {
   renderer.setSize(innerWidth, innerHeight);
@@ -22,7 +33,14 @@ function resize() {
 addEventListener("resize", resize);
 resize();
 
-renderer.setAnimationLoop((t) => {
-  cube.rotation.set(t / 3000, t / 2000, 0);
+function animate(t) {
+  requestAnimationFrame(animate);
+  const index = Math.floor(t / 1) % cubes.length;
+  cubes[index].visible = true;
+  cubes.forEach((cube) => {
+    cube.rotation.x = t / 2000;
+    cube.rotation.y = t / 3000;
+  });
   renderer.render(scene, camera);
-});
+}
+requestAnimationFrame(animate);
