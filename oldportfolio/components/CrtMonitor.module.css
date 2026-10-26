@@ -1,0 +1,260 @@
+.hero {
+  display: flex;
+  justify-content: center;
+  padding: clamp(16px, 3vw, 40px) 3vw 0;
+}
+
+/* Sized so the whole monitor fits on screen; the render is 1508 x 1537. */
+.monitor {
+  position: relative;
+  width: min(94vw, 1000px, 92vh);
+  aspect-ratio: 1508 / 1537;
+  filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.7));
+}
+
+.shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* These four numbers are the screen opening in the render, printed by build_crt.py. */
+.screen {
+  position: absolute;
+  left: 12.58%;
+  top: 14.48%;
+  width: 74.85%;
+  height: 48.96%;
+  container-type: size;
+  overflow: hidden;
+  border-radius: 13.5% / 19.5%;
+  background: radial-gradient(
+    ellipse at 50% 46%,
+    color-mix(in srgb, var(--ph) 26%, #0a0703) 0%,
+    color-mix(in srgb, var(--ph) 15%, #080502) 55%,
+    color-mix(in srgb, var(--ph) 6%, #030201) 100%
+  );
+  font-family: var(--font-terminal), monospace;
+  color: var(--ph);
+}
+
+/* burn-in: a faint ghost of the name, slightly off */
+.ghost {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 17cqh;
+  transform: translate(1.6cqw, 0.6cqw);
+  text-align: center;
+  font-size: 27cqw;
+  line-height: 0.8;
+  opacity: 0.06;
+  filter: blur(0.5cqw);
+}
+
+.beam {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6cqw 7.5cqw 5.5cqw;
+  font-size: 2.7cqw;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  filter: blur(0.04cqw);
+  text-shadow:
+    0 0 0.5cqw color-mix(in srgb, var(--ph) 90%, transparent),
+    0 0 1.6cqw color-mix(in srgb, var(--ph) 55%, transparent),
+    0 0 4.2cqw color-mix(in srgb, var(--ph) 30%, transparent);
+  animation: flicker 6s infinite;
+}
+
+.line {
+  margin: 0;
+}
+
+.nameWrap {
+  display: flex;
+  justify-content: center;
+  animation: jitter 8s steps(1) infinite;
+}
+
+.name {
+  margin: 0;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-weight: 400;
+  font-size: 27cqw;
+  line-height: 0.8;
+  text-shadow:
+    0 0 0.4cqw #fff4d6,
+    0 0 1.8cqw color-mix(in srgb, var(--ph) 95%, transparent),
+    0 0 6cqw color-mix(in srgb, var(--ph) 65%, transparent),
+    0 0 14cqw color-mix(in srgb, var(--ph) 40%, transparent),
+    0.3cqw 0 0 rgba(255, 60, 60, 0.22),
+    -0.3cqw 0 0 rgba(60, 170, 255, 0.2);
+}
+
+.surname {
+  display: flex;
+  align-items: center;
+  gap: 1cqw;
+  margin-top: 0.6cqw;
+  padding-right: 0.12em;
+  font-size: 5.6cqw;
+  line-height: 1;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.9em;
+  background: var(--ph);
+  box-shadow: 0 0 1.4cqw var(--ph);
+  animation: blink 1.05s steps(1) infinite;
+}
+
+.files {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4cqw 3cqw;
+}
+
+/* the inverted bar a pager shows at the bottom of the screen */
+.status {
+  display: flex;
+  align-items: center;
+  gap: 3cqw;
+  padding: 0.5cqw 1.6cqw;
+  background: var(--ph);
+  color: #1a1004;
+  text-shadow: none;
+  box-shadow: 0 0 1.8cqw color-mix(in srgb, var(--ph) 55%, transparent);
+}
+
+.status a {
+  color: #1a1004;
+  padding: 0.6cqw 0;
+}
+
+.status a:hover {
+  color: #1a1004;
+  text-decoration: underline;
+}
+
+.place {
+  margin-left: auto;
+}
+
+.snow,
+.scanlines,
+.mask,
+.roll,
+.glass {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.snow {
+  left: -10%;
+  top: -10%;
+  width: 120%;
+  height: 120%;
+  opacity: 0.1;
+  mix-blend-mode: screen;
+  animation: snow 0.35s steps(4) infinite;
+}
+
+.scanlines {
+  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.34) 0 1px, transparent 1px 3px);
+}
+
+.mask {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.05) 0 1px,
+    rgba(0, 255, 0, 0.035) 1px 2px,
+    rgba(0, 80, 255, 0.05) 2px 3px
+  );
+}
+
+.roll {
+  bottom: auto;
+  height: 9%;
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--ph) 10%, transparent), transparent);
+  animation: roll 8s linear infinite;
+}
+
+/* the curved glass: a soft highlight top-left and darkening toward the rounded edges */
+.glass {
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.015) 15%, transparent 30%);
+  box-shadow:
+    inset 0 0 9cqw 2.6cqw rgba(0, 0, 0, 0.72),
+    inset 0 0 1.4cqw 0.4cqw rgba(0, 0, 0, 0.9);
+}
+
+/* On a phone the screen is small: bigger type, and the file listing steps aside. */
+@container (max-width: 520px) {
+  .beam {
+    font-size: 4cqw;
+  }
+
+  .listing {
+    display: none;
+  }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  7% { opacity: 0.94; }
+  9% { opacity: 1; }
+  41% { opacity: 0.97; }
+  43% { opacity: 0.85; }
+  44% { opacity: 1; }
+  78% { opacity: 0.96; }
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes roll {
+  from { transform: translateY(-120%); }
+  to { transform: translateY(1100%); }
+}
+
+@keyframes jitter {
+  0%, 91%, 100% { transform: translate(0, 0); }
+  92% { transform: translate(-0.6cqw, 0) skewX(-2deg); }
+  93% { transform: translate(0.5cqw, 0.1cqw) skewX(1deg); }
+  94% { transform: translate(-0.1cqw, 0); }
+}
+
+@keyframes snow {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -1%); }
+  100% { transform: translate(3%, 3%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beam,
+  .nameWrap,
+  .cursor,
+  .snow {
+    animation: none;
+  }
+
+  .roll {
+    display: none;
+  }
+}
