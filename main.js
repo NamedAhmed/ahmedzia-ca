@@ -17,6 +17,7 @@ const cubes = [];
 
 for (let x = -5; x <= 5; x++) {
   for (let y = -4; y <= 4; y++) {
+    if (Math.abs(x) <= 1 && Math.abs(y) <= 1) continue;
     const cube = new THREE.Mesh(geometry, material);
     cube.position.set(x * 1.5, y * 1.5, -5);
     cube.userData = { ox: 0, oy: 0 };
